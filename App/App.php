@@ -11,6 +11,7 @@ class App
     public static $router;
     public static $db;
     public static $core;
+    public static $params;
 
     /**
      * Базовая инициализация

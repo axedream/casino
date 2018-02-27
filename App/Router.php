@@ -1,5 +1,6 @@
 <?php
 namespace App;
+use App;
 
 /**
  * Парсит адрес из $_SERVER['REQUEST_URI']
@@ -29,6 +30,7 @@ class Router
 
         $this->url = ($url) ? $url : $_SERVER; //можно было и ??, но для совместимост php5.6 оставим
         $this->getParamRequest();
+        App::$params['basic_url'] = 'http://'.$_SERVER['HTTP_HOST'];
     }
 
     /**
