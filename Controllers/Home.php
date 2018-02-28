@@ -3,6 +3,7 @@ namespace Controllers;
 use App;
 use \App\Controller;
 use Components\Rul;
+use Components\WriteReadfile;
 
 /**
  * Дефолтный контроллер
@@ -16,7 +17,7 @@ class Home extends Controller
     public $chipCount;      //количество фишек
 
     const MIN_COUNT = 10;   //минмальное количество вариантов
-    const MESSAGE_ONE = ''; //сообщение при минимальном количестве вариантов
+    const MESSAGE_ONE = 'менее 10 вариантов'; //сообщение при минимальном количестве вариантов
 
     /**
      * Точка входа расчетов
@@ -25,13 +26,47 @@ class Home extends Controller
     public function index ()
     {
         if ($this->setCount()) {
-                $array =$this->getCount();
-                $countArray = count($array);
-
-            return $this->render('result',['post'=>$array]);
+            return $this->render('result',$this->writeMessage($this->getCount()));
         } else {
             return $this->render('form');
         }
+    }
+
+    /**
+     * Читаем файл
+     * @param $name
+     * @return bool|string
+     */
+    public function file($name)
+    {
+        if (preg_match('/^[0-9a-zA-Z]{1,20}$/',$name)) {
+            $wf = new WriteReadfile();
+            return $this->render('open_file',['text'=>$wf->readDara($name)]);
+        }
+        return FALSE;
+    }
+
+    /**
+     * Метод записи
+     * @param $input
+     * @return array|bool
+     */
+    public function writeMessage($input)
+    {
+        if (is_array($input)) {
+            $count = count($input);
+            $wf = new WriteReadfile();
+            if (count($input)<=self::MIN_COUNT) {
+                $msg = self::MESSAGE_ONE;
+                $wf->writeData(self::MESSAGE_ONE);
+            } else {
+                $msg  = 'Запись успешно проведена!';
+                $wf->writeSingleArray($input);
+            }
+            return ['msg'=>$msg,'filename'=>$wf->fileName,'count'=>$count];
+
+        }
+        return FALSE;
     }
 
     /**

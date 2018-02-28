@@ -5,6 +5,18 @@
         <title>Nano MVC</title>
     </head>
     <body>
-    <?= $content ?>
+    <style type="text/css">
+        .basic {
+            margin: 20px 20px;
+        }
+    </style>
+
+    <div class="basic">
+        <a href="<?= App::$params['basic_url'] ?>/home/index">Главная</a>
+    </div>
+
+    <div class="basic">
+        <?= $content ?>
+    </div>
     </body>
 </html>

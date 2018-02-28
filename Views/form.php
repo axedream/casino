@@ -14,11 +14,7 @@
 <style type="text/css">
     div.input {
         padding-top: 10px;
-        padding-left:20px;
-        padding-right:20px;
         padding-bottom:10px;
-        margin-right:10px;
-        margin-right:10px;
     }
     input {
         border: 4px double black;
