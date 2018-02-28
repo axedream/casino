@@ -2,7 +2,7 @@
 <html lang="ru">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <title>Nano MVC</title>
+        <title>Рулетка</title>
     </head>
     <body>
     <style type="text/css">
